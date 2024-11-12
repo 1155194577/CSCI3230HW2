@@ -1,0 +1,3409 @@
+GONG RPSIOM (Sou MACHR)
+
+Fundamentals of Artificial Intelligence
+
+ 
+
+Lecture 7. Convolutional Neural Networks
+
+Prof. Qi Dou
+
+Email: gidou@cuhk.edu.hk
+Office: Room 911, 9/F, SHB
+
+Dept. of Computer Science & Engineering
+The Chinese University of Hong Kong
+
+&.
+
+   
+
+ 
+
+Part 1. Basic concepts
+
+Part 2. CNN for classification
+
+Part 3. Tricks for CNN training
+
+Part 4. Summary
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+ 
+
+Part 1. Basic concepts
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1) cs
+
+Two breakthrough architectures in CNN
+
+ 
+
+LeNet
+1998
+
+LeCun et al.
+
+AlexNet 2012
+
+Krizhevsky
+etal.
+
+Convelutions ‘Subsampling
+
+ 
+
+# of transistors
+
+Hes 10°
+
+pentiver Il
+
+Gaussiar
+Convolutions  Subsampling Full connection
+
+# of pixels used in training
+
+107 NUIST
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+  
+
+ 
+
+Uistri % Te Max
+lof pooling pooling
+
+# of transistors GPUs
+
+ee
+
+ 
+
+ 
+
+ 
+
+# of pixels used in training
+
+10% |MMGENET
+
+ 
+
+CSCI3230 (ESTR3108)
+
+ 
+
+@ LeNet-5! by LeCun et al. 1998
+- Convolve input
+- Non-linearity: ReLU
+- Pooling
+@ Good at MNIST/CIFAR-10/Traffic sign recognition.
+e Less good at more complex datasets, e.g. Caltech-101/256
+
+   
+ 
+     
+    
+
+INPUT : feat aps C3: feature maps o _
+epee S2:feature maps 16@10*10 54.4 maps CS: layer F6: layer OUTPUT
+*~
+aD
+| GAUSSIAN ce
+FULL CONNECTIONS iy
+CCONVOLUTIONS SUBSAMPLING ‘CONVOLUTIONS SUBSAMPLING CONNECTION
+
+   
+
+ 
+
+"http: //yann.lecun.com/exdb /lenet /index.html
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+AlexNet
+
+ 
+
+e@ AlexNet by Alex Krizhevsky et al. 2012
+
+e@ ILSVRC-2012 Image recognition top-1 and top-5 error rates of 37.5%
+and 17.0%
+
+ImageNet Classification with Deep Convolutional
+Neural Networks
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+shire bullterrier indri
+currant howler monkey
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Krizhevsky, A., Sutskever, I., & Hinton, G. E. Imagenet classification with
+deep convolutional neural networks. NeurlPS, 2012.
+
+ 
+
+CSCI3230 (ESTR3108)
+
+ImageNet
+
+ 
+
+e ImageNet for Large Scale Visual Recognition Challenge (ILSVRC)
+
+IM%GENET
+
+22K categories and 14/VI images
+
+* Animals * Plants * Structures
+* Bird sie ee * Artifact
+* Fish ¢ Flower * Tools
+* Mammal * Food * Appliances
+* Invertebrate * Materials * Structures
+
+http: //www.image-net.org/challenges/LSVRC/
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+www.image-net.org
+
+* Person
+* Scenes
+
+* Indoor
+
+* Geological Formations
+* Sport Activities
+
+az!
+
+ 
+
+e ImageNet dataset overview
+
+Geka be tls GARE OWES eo Za fe oe Ga
+ig 2 4 Tae a BPs MER EN Sa ile
+Siatld We wile) “One | a ies Fada
+
+mammal —- placental -—- carnivore -——- canine — working dog -——- husky
+
+aS oti aes ma Poa wb
+ee “Ee =¢ metry ail
+ee + PRE De Eel Ap Es
+
+vehicle craft — watercraft —— sailing vessel — sailboat
+
+   
+
+ 
+
+      
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+ImageNet classification (2010-2021)
+
+ 
+
+100
+
+Meta Pseudo Labels (EfficientNet-L
+
+FixResNeXt-— 101-3:2x4 8d
+NASNET -A(6))
+
+90
+
+2° er
+2 SPPN@
+O
+O 70
+¢
+dq AlexNet
+5
+Pe 60
+SIE FVs
+50 &
+40
+2012 2014 2016 2018 2020
+
+Other models -® State-of-the-art models
+
+https: //www.paperswithcode.com/sota/image-classification-on-imagenet
+
+ 
+
+CSCI3230 (ESTR3108)
+
+Computer vision tasks
+
+Classification
++ Localization
+
+ 
+
+Instance
+Segmentation
+
+~
+
+Classification Object Detection
+
+   
+      
+
+CAT,DOG, DUCK CAT, DOG, DUCK
+
+Rg pe
+
+Single object Multiple objects
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+Localization and detection
+
+ 
+
+Results from Faster R-CNN, Ren et al 2015
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+Tasos cyean ato LaLelp
+
+eYeexe)
+
+person
+eee)
+
+person
+
+backpack
+
+Lef- Tod, 4 ey-(01.4
+1th)
+
+     
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1) OR
+
+Microsoft COCO dataset
+
+ 
+
+Lin, T.Y., Maire, M., Belongie, S., Hays, J., Perona, P., Ramanan, D., Dollar,
+P. and Zitnick, C.L., Microsoft coco: Common objects in context. In European
+conference on computer vision (ECCV), 2014.
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+COCO object detection (
+
+ 
+
+70
+60 Swin-L (HTC++, multi}scal
+CSP-p6 + Mish (multi-scale)
+NAS-FPN (AmoebaNet-D, learned aug)
+50
+D-RFCN + SNIP (DPN-98 with flip,qmulti®scale)
+
+a
+< Mask R-CNN (ResNeXt=10)1-FPN)
+x 40 -
+Q Faster R-CNN (boxprefinement, context, multi-scale testing)
+
+30 $0512
+
+20
+
+10
+
+2016 2017 2018 2019 2020 2021
+
+Other models -@ Models with highest box AP
+
+ 
+
+From NN to CNN
+
+ 
+
+e A regular 3-layer Neural Network.
+
+ 
+
+ 
+
+hidden layer 1 hidden layer 2
+
+ 
+
+CSCI3230 (ESTR3108)
+
+From NN to CNN
+
+ 
+
+@ A regular 3-layer Neural Network.
+
+ 
+
+ 
+
+hidden layer 1 hidden layer 2
+
+e A Convolutional Neural Network (CNN or ConvNet) arranges its
+neurons in three dimensions, i.e., 3D output tensor.
+
+ 
+
+ 
+
+CSCI3230 (ESTR3108)
+
+Convolutional layer
+
+ 
+
+32x32x3 image -> preserve spatial structure
+
+32 height
+
+32 width
+3 depth
+
+ 
+
+CSCI3230 (ESTR3108)
+
+Convolutional layer
+
+ 
+
+32x32x3 image
+
+5x5x3 filter
+32 Lf)
+| Convolve the filter with the image
+
+i.e. “slide over the image spatially,
+computing dot products”
+
+32
+
+ 
+
+CSCI3230 (ESTR3108)
+
+Convolutional layer
+
+ 
+
+32
+
+32
+
+ 
+
+CSCI3230 (ESTR3108)
+
+32x32x3 image
+5x5x3 filter w
+
+“—~ 1 number:
+the result of taking a dot product between the
+filter and a small 5x5x3 chunk of the image
+(i.e. 5*5*3 = 75-dimensional dot product + bias)
+
+we+tb
+
+Convolutional layer
+
+ 
+
+32
+
+32
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+Convolutional layer
+
+ 
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+Convolutional layer
+
+ 
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+Convolutional layer
+
+ 
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+Convolutional layer
+
+ 
+
+activation map
+32x32x3 image
+5x5x3 filter
+
+ 
+
+convolve (slide) over all
+spatial locations
+
+Activation map is also called feature map.
+
+ 
+
+CSCI3230 (ESTR3108)
+
+Convolutional layer
+
+ 
+
+ 
+
+32x32x3 image activation maps
+5x5x3 filter
+32
+convolve (slide) over all
+spatial locations
+32 28
+
+ 
+
+CSCI3230 (ESTR3108)
+
+Convolutional layer
+
+ 
+
+For example, if we had 6 5x6 filters, we'll get 6 separate activation maps:
+
+activation maps
+
+32
+
+Convolution Layer
+
+32
+3 6
+
+ 
+
+We stack these up to get a “new image” of size 28x28x6!
+
+The output dimension is also known as channel.
+
+ 
+
+CSCI3230 (ESTR3108)
+
+Convolutional layer
+
+ 
+
+Preview: ConvNet is a sequence of Convolution Layers, interspersed with
+
+activation functions
+
+32
+
+CONV,
+
+ReLU
+e.g. 6
+5x5x3
+
+32 filters
+
+CSCI3230 (ESTR3108)
+
+ 
+
+ 
+
+28
+
+Convolutional layer
+
+ 
+
+Preview: ConvNet is a sequence of Convolutional Layers, interspersed with
+activation functions
+
+  
+
+32
+CONV, CONV, CONV,
+ReLU ReLU ReLU
+e.g. 6 e.g. 10
+SKOKS 5x5x6
+32 filters 28 filters
+3 6
+
+ 
+
+CSCI3230 (ESTR3108)
+
+Convolutional layer
+
+Linearly
+separable
+classifier
+
+Low-level Mid-level High-level
+features features features
+
+ 
+
+VGG-16 Conv1_1 VGG-16 Conv3. 2 VGG-16 Conv5_3
+
+Zeiler, M.D. and Fergus, R., Visualizing and understanding convolutional net-
+works. In European conference on computer vision (ECCV), 2014
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+Convolutional layer stack
+
+e@ Example of a CNN with hierarchical architecture
+
+CONV | CONV CONV | CONV CONV | CONV
+
+(or= 19
+ula
+alfplane
+Sale)
+
+horse
+
+ 
+
+     
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1) ET
+
+Convolutional layer spatial dimension analysis
+
+ 
+
+e@ A closer look at spatial dimensions
+
+activation map
+32x32x3 image
+5x5x3 filter
+
+ 
+
+convolve (slide) over all
+spatial locations
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+Convolutional layer
+
+ 
+
+e@ A closer look at spatial dimensions
+
+7 x 7 input
+7 assume 3 x 3 filter
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+CSCI3230 (ESTR3108)
+
+Convolutional layer spatial dimension analysis
+
+ 
+
+e@ A closer look at spatial dimensions
+
+7 x 7 input
+7 assume 3 x 3 filter
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+Convolutional layer spatial dimension analysis
+
+ 
+
+@ In practice: common to zero pad the border.
+
+7 x 7 input
+7 assume 3 x 3 filter
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+Convolutional layer spatial dimension analysis
+
+ 
+
+e@ A closer look at spatial dimensions
+
+7 x 7 input
+7 assume 3 x 3 filter
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+Convolutional layer spatial dimension analysis
+
+ 
+
+e@ A closer look at spatial dimensions
+
+7 x 7 input
+7 assume 3 x 3 filter
+
+ 
+
+|__| => 5x 5 output
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+Convolutional layer spatial dimension analysis
+
+ 
+
+e@ A closer look at spatial dimensions
+
+7 x 7 input
+7 assume 3 x 3 filter
+applied with stride 2
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+Convolutional layer spatial dimension analysis
+
+ 
+
+e@ A closer look at spatial dimensions
+
+7 x 7 input
+7 assume 3 x 3 filter
+applied with stride 2
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+Convolutional layer spatial dimension analysis
+
+ 
+
+e@ A closer look at spatial dimensions
+
+7 x 7 input
+7 assume 3 x 3 filter
+applied with stride 2
+
+ 
+
+ 
+
+=> 3x 3 output
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+Convolutional layer spatial dimension analysis
+
+ 
+
+e@ A closer look at spatial dimensions
+
+N N: input dimension
+F filter size
+
+ 
+
+ 
+
+F Output size:
+(N — F)/stride +1
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+Convolutional layer spatial dimension analysis
+
+ 
+
+e@ A closer look at spatial dimensions
+
+N
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+CSCI3230 (ESTR3108)
+
+N: input dimension
+F filter size
+
+Output size:
+(N — F)/stride +1
+
+eg. N=7,F =3:
+stride 1 => (7-—3)/14
+
+ 
+
+stride 2 => (7-—3)/24
+
+2024-2025 (Term 1)
+
+Convolutional layer spatial dimension analysis
+
+ 
+
+@ In practice: common to zero pad the border.
+
+For example, input 7 x 7 image, use 3 x 3
+filter, convolve with stride 1, padding with 1
+pixel border
+
+ 
+
+ 
+
+ 
+
+== what is the output size?
+
+ 
+
+ 
+
+o;}o;o;o;o
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+Convolutional layer spatial dimension analysis
+
+ 
+
+@ In practice: common to zero pad the border.
+
+For example, input 7 x 7 image, use 3 x 3
+filter, convolve with stride 1, padding with 1
+pixel border
+
+ 
+
+ 
+
+ 
+
+== what is the output size?
+7 x 7 output
+
+ 
+
+ 
+
+o;}o;o;o;o
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+Convolutional layer spatial dimension analysis
+
+ 
+
+@ In practice: common to zero pad the border.
+
+For example, input 7 x 7 image, use 3 x 3
+filter, convolve with stride 1, padding with 1
+pixel border
+
+ 
+
+ 
+
+ 
+
+== what is the output size?
+7 x 7 output
+
+ 
+
+ 
+
+o;}o;o;o;o
+
+ 
+
+In practice, common to see convolutional
+layers using zero-padding with (fF — 1)/2,
+stride of 1, in order to preserve size spatially
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+Convolutional layer spatial dimension analysis
+
+ 
+
+@ In practice: common to zero pad the border.
+
+For example, input 7 x 7 image, use 3 x 3
+filter, convolve with stride 1, padding with 1
+pixel border
+
+ 
+
+ 
+
+ 
+
+== what is the output size?
+7 x 7 output
+
+ 
+
+ 
+
+o;}o;o;o;o
+
+ 
+
+In practice, common to see convolutional
+layers using zero-padding with (fF — 1)/2,
+stride of 1, in order to preserve size spatially
+
+ 
+
+ 
+
+ 
+
+ 
+
+e.g. F =3 ==> zero pad with 1
+F=5 => zero pad with 2
+F=7 => zero pad with 3
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+ 
+
+e For a convolutional layer:
+
+Input volume: 224 x 224 x 3
+Use 50 8 x 8 filters with stride 2, pad 3
+
+ 
+
+What is the output feature map size?
+A 112x 1123 ae
+B 112 x 112 x 50
+C 111 x 111 x 50
+D 223 x 223 x 50
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+e For a convolutional layer:
+
+Input volume: 224 x 224 x 3
+Use 50 8 x 8 filters with stride 2, pad 3
+
+ 
+
+ 
+
+What is the output feature map size?
+A 112x 112x838
+B 112 x 112 x 50
+C 111 x 111 x 50
+D 223 x 223 x 50
+
+Correct Answer: B
+(2244+2x3-8)/24+1=112
+spatially, so 112 x 112 x 50
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+ 
+
+e For a convolutional layer:
+
+Input volume: 224 x 224 x 3
+50 8 x 8 filters with stride 2, pad 3
+
+ 
+
+Number of parameters in this layer?
+A 9,550 a
+B 9,700
+C 9,600
+D 9,650
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+ 
+
+e For a convolutional layer:
+
+Input volume: 224 x 224 x 3
+50 8 x 8 filters with stride 2, pad 3
+
+ 
+
+Number of parameters in this layer?
+A 9,550
+B 9,700
+C 9,600
+D 9,650
+
+Correct Answer: D
+
+each filter has 8 x 8x 3+1= 193
+params = > 193 x 50 = 9,650
+(+1 for bias)
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+Coho) Uialela-] EN cleat A
+
+ 
+
+e@ Receives a 3D volume of size W, x Hy x D, and requires four
+hyper-parameters:
+e@ number of filters K
+e filter spatial extent F
+e the convolution stride S
+e the amount of zero padding P
+
+ 
+
+CSCI3230 (ESTR3108)
+
+Coho) Uialela-] EN cleat A
+
+ 
+
+e@ Receives a 3D volume of size W, x Hy x D, and requires four
+hyper-parameters:
+e@ number of filters Ar
+e filter spatial extent F
+e the convolution stride S
+e the amount of zero padding P
+e@ Produces a volume of size Wa x Hy x Do with:
+eo W. =(W,+2P-—F)/S+1
+e Hy =(W,+2P—F)/S+1
+e D=K
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+Coho) Uialela-] EN cleat A
+
+ 
+
+e@ Receives a 3D volume of size W, x Hy x D, and requires four
+hyper-parameters:
+e@ number of filters K
+e filter spatial extent F
+e the convolution stride S
+e the amount of zero padding P
+e@ Produces a volume of size Wa x Hy x Do with:
+o W.=(W, +2P—F)/S+1
+eo Hy =(H,+2P—F)/S+1
+e D=K
+@ It introduces F' x F x Dy, weights in each filter, in total, for a
+convolutional layer, it has (F' x F' x D,) x K weights and K biases.
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+Coho) Uialela-] EN cleat A
+
+ 
+
+e@ Receives a 3D volume of size W, x Hy x D, and requires four
+hyper-parameters:
+e@ number of filters K
+e filter spatial extent F
+e the convolution stride S
+e the amount of zero padding P
+e@ Produces a volume of size Wa x Hy x Do with:
+o W.=(W, +2P—F)/S+1
+e Hy =(H,+2P—F)/S+1
+e D=K
+@ It introduces F x F x D, weights in each filter, in total, for a
+convolutional layer, it has (F' x F' x D,) x K weights and K biases.
+@ In the output volume, the d-th depth slice (of size W2 x Hg) is the
+result of performing a valid convolution of the d-th filter over the
+input volume with a stride of S, and then offset by d-th bias.
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+mele) aaa EN cle
+
+ 
+
+e@ Make the representations smaller and more manageable
+
+@ Operate over each activation map independently
+
+224x224x64
+14, da 112x112x64
+J ~
+224 downsampling =
+112
+
+224
+
+  
+
+ 
+
+ 
+
+CSCI3230 (ESTR3108)
+
+mele) aaa EN cle
+
+ 
+
+e@ Max pooling layer example
+
+Single depth slice
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+@ Pooling layer downsamples the volume spatially, independently in each
+depth slice of the input volume. Notice that the volume depth (i.e.,
+feature channels) is preserved.
+
+@ In this example, the input volume of size [224 x 224 x 64] is pooled
+with filter size 2, stride 2 into output volume of size [112 x 112 x 64].
+
+@ The max pooling operation, here shown with a stride of 2. That is,
+each max is taken over 4 numbers (little 2 x 2 square).
+
+ 
+
+CSCI3230 (ESTR3108)
+
+max pool with 2x2 filters
+and stride 2
+SU UUnE EEE
+
+ 
+
+ 
+
+ 
+
+ 
+
+mele) toa Nolet en ta as
+
+ 
+
+Let's assume input is W; x Hy x D.
+
+ 
+
+CSCI3230 (ESTR3108)
+
+Pooling layer — summary
+
+ 
+
+Let's assume input is W; x Hy x D.
+e@ Conv layer needs 2 hyperparameters:
+
+e pooling spatial extent F
+e the pooling stride S
+
+ 
+
+CSCI3230 (ESTR3108)
+
+Pooling layer — summary
+
+ 
+
+Let's assume input is W; x Hy x D.
+e@ Conv layer needs 2 hyperparameters:
+e pooling spatial extent F
+e the pooling stride S
+e@ This will produce an output of W2 x Hz x D where:
+e W2=(W, - F)/S4+1
+e Hy =(M,—-F)/S+1
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+Pooling layer — summary
+
+ 
+
+Let's assume input is W; x Hy x D.
+e@ Conv layer needs 2 hyperparameters:
+
+e pooling spatial extent F
+e the pooling stride S
+e@ This will produce an output of W2 x Hz x D where:
+e W2=(W, - F)/S4+1
+@ An =(M,-F)/S+1
+
+e@ Number of parameters: 0
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+Fully-connected layer
+
+ 
+
+e@ Neurons in a fully-connected layer have full connections to all
+
+activations in the previous layer, as seen in regular Neural Networks.
+e@ Their activations can hence be computed with a matrix multiplication
+
+followed by a bias offset.
+
+fc_3 fc_4
+Fully-Connected Fully-Connected
+Neural Network Neural Network
+Conv_1 Conv_2 ReLU activation
+Convolution Convolution J} nn
+(5 x 5) kernel Max-Pooling (5 * 5) kernel Max-Pooling (with
+valid padding (2x2) valid padding (2x2)
+
+dropout)
+
+ 
+
+ 
+
+2
+
+ 
+
+ 
+
+ 
+
+INPUT
+(28 x 28 x 1)
+
+n1 channels nl channels n2 channels n2 channels : @ 9
+4x4xn2)
+(24x 24x n1) (12 x 12 x n1) (8x8 xn2) (4x4xn2) uur
+
+n3 units
+
+CSCI3230 (ESTR3108)
+
+ 
+
+ 
+
+Part 2. CNN for classification
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1) Ce
+
+CNN architectures
+
+ 
+
+e Case studies on milestone CNN architectures
+e AlexNet
+e VGG
+e ResNet
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+CNN architectures
+
+ 
+
+e Case studies on milestone CNN architectures
+e AlexNet
+e VGG
+e ResNet
+e@ Other well-known CNNs...
+GoogLeNet
+SENet
+Wide ResNet
+ResNeXt
+DenseNet
+MobileNet
+NASNet
+EfficientNet
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+ 
+
+AlexNet
+
+ 
+
+@ The first work that popularized Convolutional Networks in Computer
+Vision was the AlexNet, developed by Alex Krizhevsky, Ilya Sutskever
+and Geoff Hinton, which was the winner of ILSVRC 2012.
+
+e@ Architecture:
+
+Input layer convolutional layers fully-connected layers
+
+2 3 4 5 6 7 8
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+2041
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+> >|
+dense| |dense|
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+128 Max
+Max 128 Max pooling
+pooling pooling
+
+ 
+
+04 2048
+
+ 
+
+ 
+
+ 
+
+ 
+
+CSCI3230 (ESTR3108)
+
+ 
+
+@ Input: 227 x 227 x 3 images
+e@ Parameters:
+e@ 650,000 neurons.
+e 60,000,000 parameters.
+e 630,000,000 connections.
+e Final feature layer: 4096-dimensional.
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+ 
+
+@ Input: 227 x 227 x 3 images
+
+e@ Parameters:
+650, 000 neurons.
+
+ 
+
+CSCI3230 (ESTR3108)
+
+30
+
+25
+
+20
+
+15
+
+10
+
+5
+
+0
+
+60, 000, 000 parameters.
+630, 000, 000 connections.
+Final feature layer: 4096-dimensional.
+
+28.2
+
+2010
+
+forval
+
+25.8
+
+2011
+
+FirstCNN
+16.4
+
+2012
+
+AlexNet
+
+ 
+
+e@ Experimental results:
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Model Top-1 (val) | Top-5 (val) | Top-5 (test)
+SIFT + FVs [7] —_— = 26.2%
+
+Model Top-1_| ‘Top-5 TCNN 10.7% 18.2% =
+
+Sparse coding [2] | 47.1% | 28.2% 5 CNNs 38.1% 16.4% 16.4%
+
+SIFT + FVs [24] | 45.7% | 25.7% 1 CNN* 39.0% 16.6% —_—
+
+CNN 37.5% | 17.0% 7 CNNs* 36.7% 15.4% 15.3%
+Table 1: Comparison of results on ILSVRC- Table 2: Comparison of error rates on ILSVRC-2012 validation and
+2010 test set. In italics are best results test sets. In italics are best results achieved by others. Models with an
+achieved by others. asterisk* were “pre-trained” to classify the entire ImageNet 2011 Fall
+
+release. See Section 6 for details.
+
+Krizhevsky, A., Sutskever, |. and Hinton, G.E., Imagenet classification with
+deep convolutional neural networks. Advances in neural information processing
+systems (NeurIPS), 2012.
+
+CSCI3230 (ESTR3108)
+
+ 
+
+VGG
+
+ 
+
+e@ The runner-up in ILSVRC 2014 was the network from Karen
+Simonyan and Andrew Zisserman.
+e@ Main contributions:
+
+e Investigate the effect of CNN depth on recognition.
+e Use very small convolution filters through the net, significant
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+improvement.
+3028.2
+25.8
+25
+20
+16.4
+15
+11.7 19 layers
+10
+7.3
+
+5 shallow 8 layers 8 layers
+
+2010 2011 2012 2013 2014
+
+Lin et al Sanchez &  Krizhevskyetal = Zeiler & Simonyan &
+
+Perronnin (AlexNet) Fergus —Zisserman (VGG)
+
+ 
+
+CSCI3230 (ESTR3108)
+
+VGG
+
+ 
+
+@ Architecture:
+
+ 
+
+CSCI3230 (ESTR3108)
+
+ 
+
+EC 1000.
+0
+
+TM
+
+é
+
+Qn
+
+.
+
+ 
+   
+
+512]
+
+Ak
+il
+|
+
+H
+
+th
+
+VGG16
+
+VGG19
+
+VGG
+
+ 
+
+e Architecture:
+e Convolution kernels
+
+e 3x 3: smallest size to
+capture the notion of
+left/right, up/down,
+center.
+
+e Padding: spatial resolution
+preservation.
+
+e Channels: from 64 to 512
+with a factor of 2.
+
+ 
+
+CSCI3230 (ESTR3108)
+
+ 
+
+FC 1000,
+0
+
+3x3 conv, 512
+|_3x3 conv, 512 |
+
+3
+
+OK 4
+
+      
+
+ET
+
+VGG16
+
+VGG19
+
+VGG
+
+ 
+
+e Architecture:
+e Convolution kernels
+
+e 3x 3: smallest size to
+capture the notion of
+left/right, up/down,
+center.
+
+e Padding: spatial resolution
+preservation.
+
+e Channels: from 64 to 512
+with a factor of 2.
+
+e@ Max-pooling
+
+e@ 2x 2 pixel window,
+with stride 2.
+
+ 
+
+CSCI3230 (ESTR3108)
+
+ 
+
+FC 1000,
+0
+
+3x3 conv, 512
+|_3x3 conv, 512 |
+
+3
+
+OK 4
+
+      
+
+ET
+
+VGG16
+
+VGG19
+
+VGG
+
+ 
+
+e Architecture:
+e Convolution kernels
+e 3x 3: smallest size to
+capture the notion of
+left/right, up/down,
+center.
+e Padding: spatial resolution
+preservation.
+e Channels: from 64 to 512
+with a factor of 2.
+e@ Max-pooling
+e@ 2x 2 pixel window,
+with stride 2.
+e@ Non-linearity
+e ReLU
+
+ 
+
+CSCI3230 (ESTR3108)
+
+ 
+
+AlexNet
+
+FC 1000,
+0
+
+3x3 conv, 512
+|_3x3 conv, 512 |
+
+3
+
+Te
+
+bg
+
+3 conv, 64
+
+H
+
+ 
+
+SS
+VGG16
+
+VGG19
+
+VGG
+
+ 
+
+e@ Experimental results:
+
+Table 7: Comparison with the state of the art in ILSVRC classification. Our method is denoted
+as “VGG”. Only the results obtained without outside training data are reported.
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Method top-1 val. error (%)|top-5 val. error (%)| top-5 test error (%)
+VGG (2 nets, multi-crop & dense eval.) 23.7 6.8 6.8
+VGG (1 net, multi-crop & dense eval.) 24.4 71 7.0
+VGG (ILSVRC submission, 7 nets, dense eval.) 24.7 Ts 23
+GoogLeNet (Szegedy et al., 2014) (1 net) - 1
+GoogLeNet (Szegedy et al., 2014) (7 nets) - 6.7
+
+MSRA (He et al., 2014) (11 nets) - - 8.1
+MSRA (He et al., 2014) (1 net) 27.9 9.1 91
+Clarifai (Russakovsky et al., 2014) (multiple nets) - - 11.7
+Clarifai (Russakovsky et al., 2014) (1 net) - - 12:5
+Zeiler & Fergus (Zeiler & Fergus, 2013) (6 nets) 36.0 14.7 14.8
+Zeiler & Fergus (Zeiler & Fergus, 2013) (1 net) 375 16.0 16.1
+OverFeat (Sermanet et al., 2014) (7 nets) 34.0 13.2 13.6
+OverFeat (Sermanet et al., 2014) (1 net) 35.7 14.2 -
+Krizhevsky et al. (Krizhevsky et al., 2012) (5 nets) 38.1 16.4 16.4
+Krizhevsky et al. (Krizhevsky et al.. 2012) (1 net) 40.7 18.2 -
+
+ 
+
+ 
+
+Simonyan, K. and Zisserman, A., 2014. Very deep convolutional networks for
+large-scale image recognition. arXiv preprint arXiv:1409. 1556.
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+ 
+
+ 
+
+From AlexNet to VGG, it is obvious that deeper network with
+more layers will perform better, what if we simply stack more
+layers?
+
+ 
+
+CSCI3230 (ESTR3108)
+
+ 
+
+From AlexNet to VGG, it is obvious that deeper network with
+more layers will perform better, what if we simply stack more
+
+layers?
+
+ 
+
+CIFAR-10
+
+56-layer
+Le 44-layer
+‘ge 32-layer
+“= 20-layer
+
+error (%)
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+solid: test/val
+tea? * § dashed: train
+
+ 
+
+ 
+
+ 
+
+error (%)
+
+ 
+
+ 
+
+plain-13|
+
+ 
+
+ 
+
+__|=plain-34|
+
+ImageNet-1000
+
+ 
+
+34-layer
+
+18-layer
+
+ 
+
+ 
+
+“oO 10
+
+20
+
+20 30
+iter. (1e4)
+
+40 50
+
+ 
+
+@ “Overly deep” plain nets have higher training error.
+@ A general phenomenon, observed in many datasets.
+
+Kaiming He, Xiangyu Zhang, Shaoqing Ren, & Jian Sun. “Deep Residual
+Learning for Image Recognition”. CVPR 2016. (Best Paper Award)
+
+CSCI3230 (ESTR3108)
+
+ 
+
+ 
+
+ 
+
+@ A deeper model should not have higher
+training error. =
+
+       
+ 
+
+ 
+
+ 
+
+“extra”
+layers
+
+ 
+
+ 
+
+ 
+
+ 
+
+CSCI3230 (ESTR3108)
+
+ 
+
+@ A deeper model should not have higher
+training error.
+e A solution by construction:
+@ original layers: copied from a learned
+shallower model.
+e extra layers: set as identity, at least
+the same training error.
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+CSCI3230 (ESTR3108)
+
+ 
+
+@ A deeper model should not have higher
+training error.
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+e A solution by construction:
+@ original layers: copied from a learned
+shallower model.
+e extra layers: set as identity, at least
+the same training error.
+e@ Optimization difficulties: solvers cannot
+find the solution when going deeper, it
+unlikely to be caused by vanishing
+gradients. te
+
+ 
+
+CSCI3230 (ESTR3108)
+
+ 
+
+@ Building block.
+
+e Plain net: H(a) is any desired mapping, hope the 2 weight layers fit
+
+e Residual net: H (a) is any desired mapping, hope the 2 weight layers fit
+
+F(a) and let H(x) = F(x) +2.
+
+@ F(x) is a residual mapping, which is much easier to optimize.
+
+ 
+
+ 
+
+weight layer
+
+any two
+stacked layers
+
+ 
+
+weight layer
+
+H(x)
+
+ 
+
+ 
+
+ 
+
+ 
+
+weight layer
+
+   
+ 
+
+x
+identity
+
+ 
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+plain net
+
+ 
+
+ 
+
+2x? conw, 64, /2
+v
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ResNet
+
+ 
+
+ 
+
+Pt coow, 64, 72
+Vv
+
+podl, /2
+
+ 
+
+Be conv, 64
+
+ 
+
+ 
+
+23 conv, 64
+
+ 
+
+ 
+
+2 conv, 64
+
+ 
+
+ 
+
+3 conv, 64
+
+ 
+
+ 
+
+ 
+
+ 
+
+3x3 conv, 64
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+3x3 conv, 64
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Bacon, 128,72 |
+
+ 
+
+ 
+
+ 
+
+3x3 conv, 128
+
+ 
+
+ 
+
+33 conv, 128
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+  
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+33 conv, 128
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+3x3 conv, 128
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+3x3 conv, 128
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+3x3 conw, 128
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+3x3 conv, 128
+
+ 
+
+ 
+
+ 
+
+ 
+
+3x3 conw, 256, /2 “]
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+33 conv, 256
+
+3x3 conv, 256 .
+v
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+3x3 conv, 512
+
+ 
+
+ 
+
+   
+ 
+
+    
+
+ 
+
+3x3 conv, 512
+
+eg pool
+¥
+
+ 
+
+fe 2000
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+30
+
+25
+
+20
+
+15
+
+10
+
+ 
+
+ 
+
+ 
+
+ 
+
+152 layers
+
+ 
+
+16.4 /
+
+ 
+
+ 
+
+11.7 19 layers} |22 layers}
+
+7.3 67.
+shallow 8 layers | | 8 layers g a 3.6
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+2010 2011 2012 2013 2014 2014 2015
+Lin et al Sanchez & Krizhevskyetal Zeller & © Simonyan& Szegedyetal He etal
+Perronnin (AlexNet) Fergus _Zisserman (VGG) (GoogleNet) —_(ResNet)
+
+ 
+
+ 
+
+MSRA @ ILSVRC & COCO 2015 Competitions
+
+* 1st places in all five main tracks
+* ImageNet Classification: “Ultra-deep” (quote Yann) 152-layer nets
+* ImageNet Detection: 16% better than 2nd
+* ImageNet Localization: 27% better than 2nd
+* COCO Detection: 11% better than 2nd
+* COCO Segmentation: 12% better than 2nd
+
+ 
+
+ 
+
+CSCI3230 (ESTR3108)
+
+Beat “human
+performance” of
+5.1%! (Russakovsky
+
+2014)
+
+ 
+
+ResNet
+
+ 
+
+e@ Experimental results: CIFAR10
+
+oe Deep ResNets can be trained without difficulties.
+e Deeper ResNets have lower training error, and also lower test error.
+
+ 
+
+CIFAR-10 plain nets CIFAR-10 ResNets
+
+LZ 56-layer
+44-layer
+moi
+
+gee 32-layer
+
+    
+ 
+
+ 
+
+20-layer
+32-layer
+44-layer
+56-layer
+110-layer
+
+ 
+
+ 
+
+ 
+
+solid: test
+
+% 1 3 4 5 «dashed: train
+iter. (le4)
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+0 (ESTR3108)
+
+ResNet
+
+ 
+
+e@ Experimental results: ImageNet
+
+oe Deep ResNets can be trained without difficulties.
+e@ Deeper ResNets have lower training error, also lower test error.
+
+ 
+
+ImageNet plain nets ImageNet ResNets
+
+  
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+34-layer 18-layer
+solid: test = aoa
+eaplaincis ‘ResNet-18 Nei sem ,~é~
+= tiain 34 dashed: train 18-layer \—ResNet-34 34-layer
+% 10 20 40 50 a 0 10 20 40 50
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+30 30
+iter, (Le4) iter. (1e4)
+
+ 
+
+ 
+
+ 
+
+ 
+
+CSCI3230 (ESTR3108)
+
+Comparing complexity
+
+ 
+
+e Different CNN models’ accuracy and computation cost
+
+    
+ 
+
+: Inception- nwa
+BO fe 80f---- s : - oe
+H _ ResNet-152
+Resnet so , VGG-16 VGG-19
+75 5 : ResNet-101
+: o ResNet-34
+= 70 = 70 ‘ResNet-18,
+> > :
+8 8 GoogLeNet
+g g Net
+@ 65 3 65 '
+q a © Bn-nin
+S S !
+* 60 © 60 : 5M 35M. 65M. 95M..125M_- 155M
+55 55
+*° Wek gel 43. 40 49 3h 6 .od Woh Dh 5 3 10 15 20 25 30 35 40
+ERS TPG MGM Wy ND Cl? .
+ei oF cu VP eX GO CO re WE av ox 0% 0 Operations [G-Ops]
+me e 09 %e' ENON ene wv CC os
+
+Canziani, A., Paszke, A. and Culurciello, E., 2016. An analysis of deep neural
+network models for practical applications. arXiv preprint arXiv:1605.07678.
+
+ 
+
+0 (ESTR3108) 2024-2025 (Term 1)
+
+ 
+
+ 
+
+Part 3. Tricks for CNN training
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1) 64 / 74
+
+Data augmentation
+
+ 
+
+e Data augmentation for images at the input layer
+cat”
+Load image
+and label oo
+; Compute
+
+~
+| —SP OSs
+—_>
+
+  
+ 
+
+a aad
+
+Transform image
+
+ 
+
+CSCI3230 (ESTR3108)
+
+ 
+
+Data augmentation
+
+e@ Some examples
+
+     
+ 
+
+  
+    
+   
+
+(b) Crop and resize (c) Crop, resize (and flip) (d) Color distort. (drop) (e) Color distort. (jitter)
+a & x
+
+ 
+
+     
+
+be ized
+
+ee
+
+(f) Rotate {90°, 180°, 270°} (g) Cutout (h) Gaussian noise (i) Gaussian blur (j) Sobel filtering
+
+Chen, T., Kornblith, S., Norouzi, M. and Hinton, G., 2020, November. A
+simple framework for contrastive learning of visual representations. In Inter-
+national conference on machine learning (ICML), 2020.
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+Data augmentation - benefits
+
+ 
+
+Adding more training data into the models.
+
+Alleviating data scarcity for learning better models.
+
+Reducing data overfitting (i.e., the learned network corresponds too
+closely to a limited set of data points). Augmentations help create
+variability in data.
+
+Helping resolve class imbalance issues in classification.
+
+Reducing costs of collecting and labeling data.
+
+Increasing generalization ability of the models.
+
+ 
+
+CSCI3230 (ESTR3108)
+
+ 
+
+e@ Dropout is an extremely effective yet simple regularization technique
+by Srivastava et al.
+
+@ While training, dropout is implemented by only keeping a neuron
+active with some probability p (a hyperparameter, usually p = 0.5)
+
+e@ This means that a neuron is temporally removed in the forward pass
+and any weight updates are not applied to this neuron on the
+backward pass.
+
+ 
+
+(a) Standard Neural Net (b) After applying dropout.
+
+Srivastava, N., Hinton, G., Krizhevsky, A., Sutskever, |. and Salakhutdinov, R., Dropout:
+a simple way to prevent neural networks from overfitting. The journal of machine
+learning research, 2014.
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1) WL
+
+Dropout - benefits
+
+ 
+
+e@ Preventing all neurons in a layer from synchronously optimizing their
+weights. Random dropout prevents all the neurons from converging
+to the same goal (or called co-adaptation).
+
+@ In other words, if neurons are randomly “turned-off” during network
+training, the remaining neurons will have to step in and handle the
+representation required to make predictions for the missing neurons.
+
+ 
+
+CSCI3230 (ESTR3108)
+
+Dropout - benefits
+
+ 
+
+e@ Preventing all neurons in a layer from synchronously optimizing their
+weights. Random dropout prevents all the neurons from converging
+to the same goal (or called co-adaptation).
+
+e In other words, if neurons are randomly “turned-off” during network
+training, the remaining neurons will have to step in and handle the
+representation required to make predictions for the missing neurons.
+
+e Dropout prevents co-adaptation by making the presence of other
+neurons unreliable. Thus, a neuron cannot rely on other specific
+neurons to make predictions. Instead, it must perform well in a wide
+variety of different contexts provided by other neurons. Therefore,
+dropout improves model generalization capability.
+
+e@ Dropout, in practice, as a regularization of the deep neural networks
+to reduce network overfitting.
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1) ar
+
+ 
+
+Part 4. Summary
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+ 
+
+e@ Basic concepts
+e@ Convolutional layer
+e Pooling layer
+e Fully-connected layer
+e@ CNN architectures
+e@ AlexNet
+0 VGG
+e@ ResNet
+@ Training CNNs
+
+e Data augmentation
+e Dropout
+
+ 
+
+CSCI3230 (ESTR3108)
+
+Reading materials
+
+ 
+
+e@ Stanford CS231n: Convolutional Neural Networks for Visual
+Recognition http: //cs231n.stanford.edu/
+
+e@ Chapter 9 - Convolutional Networks, Deep learning. Goodfellow, I.,
+Bengio, Y. and Courville, A., MIT press, 2016.
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+ 
+
+ESTR3108
+
+ 
+
+CSCI3230 (ESTR3108) 2024-2025 (Term 1)
+
+ 
+
+Invited talk
+
+ 
+
+CSCI3230 (ESTR3108)
+
